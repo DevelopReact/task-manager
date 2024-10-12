@@ -1,0 +1,28 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.Button {
+  width: 70px;
+  height: 34px;
+  border-radius: 4px;
+  color: $color1;
+  @include FlexContainer;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.submit {
+  background-color: $color13
+}
+
+.reset {
+  background-color: $color2
+}
+
+.disabled {
+  background-color: $color19
+}

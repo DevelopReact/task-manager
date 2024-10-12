@@ -1,0 +1,19 @@
+@import "@/app/styles/mixins/mixins.scss";
+@import "@/app/styles/variables/palette.scss";
+
+.Checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: $color19;
+  border-radius: 2px;
+  cursor: pointer;
+  @include FlexContainer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.active {
+  background-color: $color3;
+}

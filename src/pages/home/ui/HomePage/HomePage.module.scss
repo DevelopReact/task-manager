@@ -1,0 +1,17 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import "@/app/styles/variables/palette.scss";
+
+.HomePage {
+  width: 100%;
+  height: 100%;
+  @include FlexDirection;
+  justify-content: start;
+  background-color: $color20;
+}
+
+.HomePageContent {
+  width: 80%;
+  height: 90%;
+  @include FlexContainer;
+  gap: 20px;
+}

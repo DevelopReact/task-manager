@@ -1,0 +1,7 @@
+@import '@/app/styles/mixins/mixins.scss';
+
+.Illustration {
+  width: 100%;
+
+  @include FlexDirection;
+}

@@ -1,0 +1,38 @@
+@import "@/app/styles/mixins/mixins.scss";
+@import "@/app/styles/variables/palette.scss";
+
+.TaskCard {
+  width: 100%;
+  height: 100%;
+  background-color: $color6;
+}
+
+.formTask {
+  width: 100%;
+  @include FlexDirection;
+}
+
+.formWrapper {
+  width: 100%;
+  padding: 30px;
+  @include FlexDirection;
+  gap: 30px;
+}
+
+.inputWrapper {
+  width: 100%;
+  @include FlexDirection(start);
+  gap: 10px;
+
+  p {
+    width: 100%;
+    text-align: start;
+  }
+}
+
+.tags,
+.formButton {
+  width: 100%;
+  @include FlexContainer(start);
+  gap: 20px;
+}

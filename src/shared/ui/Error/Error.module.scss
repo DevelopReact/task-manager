@@ -1,0 +1,8 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.Error {
+  width: 100%;
+  @include FlexContainer;
+  color: $color11;
+}

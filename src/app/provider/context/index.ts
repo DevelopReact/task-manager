@@ -1,0 +1,1 @@
+export { TaskPanelsProvider } from './TaskPanelsProvider';

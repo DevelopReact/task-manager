@@ -1,0 +1,39 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.Tag {
+  width: 84px;
+  height: 34px;
+  @include FlexContainer;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.sketchBC {
+  @include tag-style($color7);
+}
+
+.spotifyBC {
+  @include tag-style($color9);
+}
+
+.dribbleBC {
+  @include tag-style($color11);
+}
+
+.behanceBC {
+  @include tag-style($color13);
+}
+
+.uxBC {
+  @include tag-style($color17);
+}
+
+.active {
+  border: 2px solid $color3;
+  border-radius: 4px;
+}

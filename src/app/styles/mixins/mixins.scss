@@ -1,0 +1,32 @@
+@mixin FlexContainer($direction:center) {
+	display: flex;
+	justify-content: $direction;
+	align-items: center;
+ }
+ 
+ @mixin FlexDirection($direction:center) {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: $direction;
+ }
+
+ @mixin tag-style($color) {
+	background: transparent;
+	color: $color;
+	position: relative;
+	z-index: 1;
+ 
+	&::before {
+	  content: '';
+	  background: $color;
+	  opacity: 0.1;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  z-index: -1;
+	  border-radius: 4px;
+	}
+ }
