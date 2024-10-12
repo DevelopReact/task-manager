@@ -6,7 +6,6 @@ import {
   CreateTaskResponse,
   DeleteTaskRequest,
   DeleteTaskResponse,
-  GetTasksRequest,
   GetTasksResponse,
   UpdateTaskRequest
 } from '../types/tasksServicesTypes';
@@ -14,7 +13,7 @@ import {
 class taskService {
   private taskEndpoint = '/tasks';
 
-  async getTasks(data: GetTasksRequest) {
+  async getTasks() {
     return mockapiInstance.get<GetTasksResponse>(this.taskEndpoint);
   }
 
