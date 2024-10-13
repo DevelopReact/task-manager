@@ -13,25 +13,25 @@ import styles from './TaskFilterPanel.module.scss';
 interface TaskFilterPanelProps {
   filterActive: boolean;
   resetFilters: () => void;
-  deadlineFilterActive: boolean;
-  setDeadlineFilterActive: (deadlineFilterCheck: boolean) => void;
+  toggleDeadlineOrder: () => void;
   checkboxFilterActive: boolean;
   setCheckboxFilterActive: (checkboxFilterCheck: boolean) => void;
   tagsTasksList: string[];
   setSelectedTag: (setSelect: string | null) => void;
   tagSelectRef: React.RefObject<HTMLSelectElement>;
+  deadlineOrder: 'asc' | 'desc' | null;
 }
 
 export const TaskFilterPanel: FC<TaskFilterPanelProps> = ({
   filterActive,
   resetFilters,
-  deadlineFilterActive,
-  setDeadlineFilterActive,
+  toggleDeadlineOrder,
   checkboxFilterActive,
   setCheckboxFilterActive,
   tagsTasksList,
   setSelectedTag,
-  tagSelectRef
+  tagSelectRef,
+  deadlineOrder
 }) => {
   return (
     <div className={styles.TaskFilterPanel}>
@@ -52,9 +52,9 @@ export const TaskFilterPanel: FC<TaskFilterPanelProps> = ({
       <div className={styles.taskFilterSection}>
         <div
           className={`${styles.taskFilter} ${styles.deadlineFilter}`}
-          onClick={() => setDeadlineFilterActive(!deadlineFilterActive)}
+          onClick={toggleDeadlineOrder}
         >
-          {deadlineFilterActive ? <ArrowUpFilter /> : <ArrowDownFilter />}
+          {deadlineOrder === 'asc' ? <ArrowUpFilter /> : <ArrowDownFilter />}
         </div>
         <div className={`${styles.taskFilter} ${styles.tagFilter}`}>
           <select

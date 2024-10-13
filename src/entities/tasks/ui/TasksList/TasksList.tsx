@@ -14,7 +14,9 @@ interface TasksListProps {
 
 export const TasksList: FC<TasksListProps> = ({ tasks }) => {
   const [filterActive, setFilterActive] = useState(false);
-  const [deadlineFilterActive, setDeadlineFilterActive] = useState(false);
+  const [deadlineOrder, setDeadlineOrder] = useState<'asc' | 'desc' | null>(
+    null
+  );
   const [checkboxFilterActive, setCheckboxFilterActive] = useState(false);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
@@ -24,12 +26,12 @@ export const TasksList: FC<TasksListProps> = ({ tasks }) => {
 
   useEffect(() => {
     setFilterActive(
-      deadlineFilterActive || checkboxFilterActive || selectedTag !== null
+      deadlineOrder !== null || checkboxFilterActive || selectedTag !== null
     );
-  }, [deadlineFilterActive, checkboxFilterActive, selectedTag]);
+  }, [deadlineOrder, checkboxFilterActive, selectedTag]);
 
   const getFilteredTasks = () => {
-    const filteredTasks = tasks
+    let filteredTasks = tasks
       .filter((task) => {
         if (checkboxFilterActive) {
           return task.isComplete === true;
@@ -43,21 +45,25 @@ export const TasksList: FC<TasksListProps> = ({ tasks }) => {
         return true;
       });
 
-    if (deadlineFilterActive) {
-      return filteredTasks.sort(
-        (a, b) =>
-          new Date(a.deadline).getTime() - new Date(b.deadline).getTime()
-      );
-    } else {
-      return filteredTasks.sort(
-        (a, b) =>
-          new Date(b.deadline).getTime() - new Date(a.deadline).getTime()
-      );
+    if (deadlineOrder) {
+      filteredTasks = filteredTasks.sort((a, b) => {
+        const dateA = new Date(a.deadline).getTime();
+        const dateB = new Date(b.deadline).getTime();
+        return deadlineOrder === 'asc' ? dateA - dateB : dateB - dateA;
+      });
     }
+
+    return filteredTasks;
+  };
+
+  const toggleDeadlineOrder = () => {
+    setDeadlineOrder((prev) =>
+      prev === 'asc' ? 'desc' : prev === 'desc' ? null : 'asc'
+    );
   };
 
   const resetFilters = () => {
-    setDeadlineFilterActive(false);
+    setDeadlineOrder(null);
     setCheckboxFilterActive(false);
     setSelectedTag(null);
 
@@ -71,13 +77,13 @@ export const TasksList: FC<TasksListProps> = ({ tasks }) => {
       <TaskFilterPanel
         filterActive={filterActive}
         resetFilters={resetFilters}
-        deadlineFilterActive={deadlineFilterActive}
-        setDeadlineFilterActive={setDeadlineFilterActive}
+        toggleDeadlineOrder={toggleDeadlineOrder}
         checkboxFilterActive={checkboxFilterActive}
         setCheckboxFilterActive={setCheckboxFilterActive}
         tagsTasksList={tagsTasksList}
         setSelectedTag={setSelectedTag}
         tagSelectRef={tagSelectRef}
+        deadlineOrder={deadlineOrder}
       />
       {getFilteredTasks().map(
         ({ id, title, deadline, description, tag, isComplete }) => (
