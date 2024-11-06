@@ -1,4 +1,4 @@
 export { TaskCard } from './TaskCard/TaskCard';
 export { TaskItem } from './TaskItem/TaskItem';
-export { CompleteMark } from './CompleteMark/CompleteMark';
+export { TaskCompleteMark } from './TaskCompleteMark/TaskCompleteMark';
 export { TasksList } from './TasksList/TasksList';

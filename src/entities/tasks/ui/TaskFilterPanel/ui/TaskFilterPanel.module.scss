@@ -21,15 +21,10 @@
   cursor: pointer;
 }
 
+.tagFilter,
 .checkboxFilter {
-  width: 20px;
-  @include FlexDirection();
-}
-
-.tagFilter {
-  flex-direction: row;
-
   select {
+    cursor: pointer;
     border: none;
     outline: none;
     color: $color3;

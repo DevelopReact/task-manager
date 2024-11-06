@@ -13,7 +13,7 @@ export const getTasks = (dispatch: Dispatch<TaskActions>) => {
   dispatch(taskActionCreators.setIsSuccess(false));
 
   taskServices
-    .getTasks()
+    .getTasks({})
     .then(({ data }) => {
       dispatch(taskActionCreators.setTasks(data));
       if (data.length) {

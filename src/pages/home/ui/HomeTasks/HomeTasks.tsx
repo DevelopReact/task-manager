@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { getTasks } from '@/entities/tasks/model/thunks/taskThunks';
 //selectors
 import { getTaskState } from '@/entities/tasks/model/selectors/taskSelectors';
+import { getTaskFilterState } from '@/entities/tasks/ui/TaskFilterPanel/model/selectors/taskFilterSelector';
 //ui
 import { TasksList } from '@/entities/tasks/ui';
 import { Error, Loader } from '@/shared/ui';
@@ -16,6 +17,7 @@ interface HomeTasksProps {}
 
 export const HomeTasks: FC<HomeTasksProps> = ({}) => {
   const { tasks, isLoading, isSuccess, error } = useSelector(getTaskState);
+  const { tasksFiltered } = useSelector(getTaskFilterState);
 
   const dispatch = useDispatch();
 
@@ -35,5 +37,5 @@ export const HomeTasks: FC<HomeTasksProps> = ({}) => {
     return <Illustration />;
   }
 
-  return <TasksList tasks={tasks} />;
+  return <TasksList tasks={tasks} tasksFiltered={tasksFiltered} />;
 };

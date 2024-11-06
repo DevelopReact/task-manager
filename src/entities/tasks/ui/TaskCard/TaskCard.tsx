@@ -15,7 +15,7 @@ import { CreateTaskRequest } from '../../model/types/tasksServicesTypes';
 //ui
 import { Button, Input } from '@/shared/ui';
 import { Tags } from '../../../tags/ui/Tags/Tags';
-import { CompleteMark } from '../CompleteMark/CompleteMark';
+import { TaskCompleteMark } from '../TaskCompleteMark/TaskCompleteMark';
 //hooks
 import { useDispatch } from '@/shared/libs/hooks/useDispatch';
 //lib
@@ -106,7 +106,7 @@ export const TaskCard: FC<TaskCardProps> = ({}) => {
         className={styles.formTask}
         onSubmit={handleSubmit(onSubmitFormClick)}
       >
-        <CompleteMark
+        <TaskCompleteMark
           checkCompleteMark={checkCompleteMark}
           setCheckCompleteMark={setCheckCompleteMark}
         />

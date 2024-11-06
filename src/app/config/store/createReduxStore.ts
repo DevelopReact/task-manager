@@ -1,17 +1,25 @@
 import { tagReducer } from '@/entities/tags/model/reducer/tagReducer';
 import { taskReducer } from '@/entities/tasks/model/reducer/taskReducer';
+import { taskFilterReducer } from '@/entities/tasks/ui/TaskFilterPanel/model/reducer/taskFilterReducer';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { thunk as thunkMiddlware } from 'redux-thunk';
 
 export const createReduxStore = () => {
   const reducers = {
     task: taskReducer,
-    tag: tagReducer
+    tag: tagReducer,
+    tasksFiltered: taskFilterReducer
   };
 
   const rootReducer = combineReducers(reducers);
+
   // @ts-expect-error
-  const store = createStore(rootReducer, applyMiddleware(thunkMiddlware));
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunkMiddlware))
+  );
 
   return store;
 };

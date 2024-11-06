@@ -9,12 +9,25 @@ import {
   GetTasksResponse,
   UpdateTaskRequest
 } from '../types/tasksServicesTypes';
+import { createSearchParams } from 'react-router-dom';
 
 class taskService {
   private taskEndpoint = '/tasks';
 
-  async getTasks() {
-    return mockapiInstance.get<GetTasksResponse>(this.taskEndpoint);
+  async getTasks({ searchQuery }: { searchQuery?: string }) {
+    // const params = new URLSearchParams();
+
+    // if (searchQuery) {
+    //   params.set('name', searchQuery);
+    // }
+
+    // const queryString = params.toString();
+
+    // return mockapiInstance.get<GetTasksResponse>(
+    //   `${this.taskEndpoint}?${queryString}`
+    // );
+
+    return mockapiInstance.get<GetTasksResponse>(`${this.taskEndpoint}`);
   }
 
   async createTask(task: CreateTaskRequest) {
@@ -22,7 +35,7 @@ class taskService {
   }
 
   async updateTask({ updatedFields, updatedTaskId }: UpdateTaskRequest) {
-    return mockapiInstance.put<UpdateTaskRequest>(
+    return mockapiInstance.patch<UpdateTaskRequest>(
       `${this.taskEndpoint}/${updatedTaskId}`,
       updatedFields
     );
