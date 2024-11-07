@@ -14,12 +14,7 @@ export const createReduxStore = () => {
   const rootReducer = combineReducers(reducers);
 
   // @ts-expect-error
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const store = createStore(
-    rootReducer,
-    composeEnhancers(applyMiddleware(thunkMiddlware))
-  );
+  const store = createStore(rootReducer, applyMiddleware(thunkMiddlware));
 
   return store;
 };
