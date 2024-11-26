@@ -1,0 +1,8 @@
+@import '@/app/styles/mixins/mixins.scss';
+
+.HomeUserPanel {
+  width: 80%;
+  @include FlexContainer(end);
+  gap: 20px;
+  padding: 20px 0;
+}

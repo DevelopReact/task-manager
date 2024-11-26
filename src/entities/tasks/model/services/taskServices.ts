@@ -6,28 +6,37 @@ import {
   CreateTaskResponse,
   DeleteTaskRequest,
   DeleteTaskResponse,
+  GetTasksRequest,
   GetTasksResponse,
   UpdateTaskRequest
 } from '../types/tasksServicesTypes';
-import { createSearchParams } from 'react-router-dom';
 
 class taskService {
   private taskEndpoint = '/tasks';
 
-  async getTasks({ searchQuery }: { searchQuery?: string }) {
-    // const params = new URLSearchParams();
+  async getTasks(
+    { completeMark, deadline, tag }: GetTasksRequest,
+    page: number
+  ) {
+    const params = new URLSearchParams();
 
-    // if (searchQuery) {
-    //   params.set('name', searchQuery);
-    // }
+    if (tag) {
+      params.set('tag', tag);
+    }
 
-    // const queryString = params.toString();
+    if (completeMark) {
+      params.set('isComplete', String(completeMark));
+    }
 
-    // return mockapiInstance.get<GetTasksResponse>(
-    //   `${this.taskEndpoint}?${queryString}`
-    // );
+    if (deadline !== null) {
+      params.set('sortBy', deadline === 'asc' ? 'deadline' : '-deadline');
+    }
 
-    return mockapiInstance.get<GetTasksResponse>(`${this.taskEndpoint}`);
+    const queryString = params.toString();
+
+    return mockapiInstance.get<GetTasksResponse>(
+      `${this.taskEndpoint}?page=${page}&limit=${8}&${queryString}`
+    );
   }
 
   async createTask(task: CreateTaskRequest) {

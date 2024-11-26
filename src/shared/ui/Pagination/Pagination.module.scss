@@ -1,0 +1,29 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette';
+
+.Pagination {
+  @include FlexContainer();
+  gap: 30px;
+  margin: 10px 0;
+  color: $color15;
+}
+
+.countPage {
+  @include FlexContainer();
+  gap: 10px;
+}
+
+.pageLink,
+.prevButton,
+.nextButton {
+  cursor: pointer;
+}
+
+.active {
+  font-weight: bold;
+  color: $color3;
+}
+
+.disabled {
+  color: $color15;
+}

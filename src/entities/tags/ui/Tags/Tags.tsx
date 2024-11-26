@@ -12,6 +12,7 @@ import { Loader } from '@/shared/ui/Loader/Loader';
 import { useDispatch } from '@/shared/libs/hooks/useDispatch';
 // styles
 import styles from './Tags.module.scss';
+import { ITag } from '../../model/types/tagTypes';
 
 interface TagsProps {
   selectedTag: string;
@@ -44,16 +45,16 @@ export const Tags: FC<TagsProps> = ({ setSelectedTag, selectedTag, error }) => {
   return (
     <div className={styles.Tags}>
       <div className={styles.wrapperTags}>
-        {tags.map(({ title, id }) => (
+        {tags.map((tag: ITag) => (
           <Tag
-            backgroundColor={title}
+            backgroundColor={tag.title}
             onClick={() => {
-              onSelectTagClick(title);
+              onSelectTagClick(tag.title);
             }}
-            active={selectedTag === title}
-            key={id}
+            active={selectedTag === tag.title}
+            key={tag.id}
           >
-            {title}
+            {tag.title}
           </Tag>
         ))}
       </div>

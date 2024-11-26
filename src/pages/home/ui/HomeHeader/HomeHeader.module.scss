@@ -1,0 +1,27 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.HomeHeader {
+  width: 80%;
+  @include FlexContainer(end);
+  gap: 20px;
+  padding: 20px 0;
+  cursor: pointer;
+
+  svg {
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.UserTaskPanel {
+  position: relative;
+  @include FlexContainer;
+  gap: 20px;
+  color: $color3;
+
+  span {
+    font-family: cursive;
+  }
+}

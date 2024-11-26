@@ -9,7 +9,19 @@ const initialState: TaskStateSchema = {
   error: '',
   isLoading: false,
   tasks: [],
-  isSuccess: false
+  isSuccess: false,
+  filters: {
+    completeMark: '',
+    deadline: null,
+    tag: ''
+  },
+  meta: {
+    total_items: 0,
+    total_pages: 0,
+    current_page: 0,
+    per_page: 0,
+    remaining_count: 0
+  }
 };
 
 export const taskReducer: Reducer<TaskStateSchema, TaskActions> = (
@@ -25,6 +37,10 @@ export const taskReducer: Reducer<TaskStateSchema, TaskActions> = (
       return { ...state, tasks: action.payload };
     }
 
+    case TaskActionTypes.SET_META: {
+      return { ...state, meta: action.payload };
+    }
+
     case TaskActionTypes.SET_ERROR: {
       return { ...state, error: action.payload };
     }
@@ -33,6 +49,13 @@ export const taskReducer: Reducer<TaskStateSchema, TaskActions> = (
       return {
         ...state,
         isSuccess: action.payload
+      };
+    }
+
+    case TaskActionTypes.SET_FILTERS: {
+      return {
+        ...state,
+        filters: { ...state.filters, ...action.payload }
       };
     }
 

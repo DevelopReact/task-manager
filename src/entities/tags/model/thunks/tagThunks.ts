@@ -11,6 +11,7 @@ export const getTags = (dispatch: Dispatch<TagActions>) => {
     .getTags()
     .then(({ data }) => {
       dispatch(tagActionCreators.setTags(data));
+      dispatch(tagActionCreators.setError(''));
     })
     .catch((error) => {
       dispatch(tagActionCreators.setError(error.message));

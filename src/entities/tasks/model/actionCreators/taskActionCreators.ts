@@ -1,8 +1,10 @@
 import { TaskActionTypes } from '../actionTypes/TaskActionTypes';
 import {
   SetErrorType,
-  SetIsSuccess,
+  SetFiltersType,
+  SetIsSuccessType,
   SetLoadingType,
+  SetMetaType,
   SetTasksType
 } from '../types/taskActions';
 
@@ -27,9 +29,25 @@ const setTasks = (payload: SetTasksType['payload']): SetTasksType => {
   };
 };
 
-const setIsSuccess = (payload: SetIsSuccess['payload']): SetIsSuccess => {
+const setMeta = (payload: SetMetaType['payload']): SetMetaType => {
+  return {
+    type: TaskActionTypes.SET_META,
+    payload: payload
+  };
+};
+
+const setIsSuccess = (
+  payload: SetIsSuccessType['payload']
+): SetIsSuccessType => {
   return {
     type: TaskActionTypes.SET_IS_SUCCESS,
+    payload: payload
+  };
+};
+
+const setFilters = (payload: SetFiltersType['payload']): SetFiltersType => {
+  return {
+    type: TaskActionTypes.SET_FILTERS,
     payload: payload
   };
 };
@@ -38,5 +56,7 @@ export const taskActionCreators = {
   setTasks,
   setError,
   setIsLoading,
-  setIsSuccess
+  setIsSuccess,
+  setFilters,
+  setMeta
 };

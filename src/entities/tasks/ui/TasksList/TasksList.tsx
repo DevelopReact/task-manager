@@ -3,33 +3,28 @@ import { FC } from 'react';
 //types
 import { ITask } from '../../model/types/taskTypes';
 //ui
-import { TaskItem } from '../TaskItem/TaskItem';
-import { TaskFilterPanel } from '../TaskFilterPanel/ui';
+import { TaskItem } from '../index';
 // styles
 import styles from './TasksList.module.scss';
 
 interface TasksListProps {
   tasks: ITask[];
-  tasksFiltered: ITask[];
 }
 
-export const TasksList: FC<TasksListProps> = ({ tasks, tasksFiltered }) => {
+export const TasksList: FC<TasksListProps> = ({ tasks }) => {
   return (
     <div className={styles.TasksList}>
-      <TaskFilterPanel tasks={tasks} />
-      {tasksFiltered.map(
-        ({ id, title, deadline, description, tag, isComplete }) => (
-          <TaskItem
-            id={id}
-            isComplete={isComplete}
-            deadline={deadline}
-            title={title}
-            description={description}
-            tag={tag}
-            key={id}
-          />
-        )
-      )}
+      {tasks.map(({ id, title, deadline, description, tag, isComplete }) => (
+        <TaskItem
+          id={id}
+          isComplete={isComplete}
+          deadline={deadline}
+          title={title}
+          description={description}
+          tag={tag}
+          key={id}
+        />
+      ))}
     </div>
   );
 };

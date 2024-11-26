@@ -1,0 +1,38 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.TaskFilterPanel {
+  width: 100%;
+  padding: 19px 26px;
+  background-color: $color6;
+  @include FlexContainer(space-between);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.taskFilterSection {
+  min-width: 130px;
+  @include FlexContainer(flex-start);
+  gap: 20px;
+}
+
+.taskFilter {
+  @include FlexDirection();
+  cursor: pointer;
+}
+
+.tagFilter,
+.checkboxFilter {
+  select {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: $color3;
+
+    option {
+      color: $color3;
+      text-align: center;
+    }
+  }
+}

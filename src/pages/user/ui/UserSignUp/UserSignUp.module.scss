@@ -1,0 +1,25 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.UserSignUp {
+  width: 30%;
+  @include FlexDirection;
+  gap: 30px;
+
+  h2 {
+    font-family: cursive;
+    color: $color3;
+  }
+}
+
+.inputWrapper {
+  width: 100%;
+  @include FlexDirection(start);
+  gap: 10px;
+  position: relative;
+
+  span {
+    position: absolute;
+    bottom: -20px;
+  }
+}

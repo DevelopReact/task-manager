@@ -1,22 +1,39 @@
-import { tagReducer } from '@/entities/tags/model/reducer/tagReducer';
-import { taskReducer } from '@/entities/tasks/model/reducer/taskReducer';
-import { taskFilterReducer } from '@/entities/tasks/ui/TaskFilterPanel/model/reducer/taskFilterReducer';
+//redux thunk persist
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { thunk as thunkMiddlware } from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+//lib
+import { composeWithDevTools } from '@redux-devtools/extension';
+//reducers
+import { tagReducer } from '@/entities/tags/model/reducer/tagReducer';
+import { taskReducer } from '@/entities/tasks/model/reducer/taskReducer';
+import { userReducer } from '@/entities/user/model/reducer/userReducer';
 
-export const createReduxStore = () => {
-  const reducers = {
-    task: taskReducer,
-    tag: tagReducer,
-    tasksFiltered: taskFilterReducer
-  };
-
-  const rootReducer = combineReducers(reducers);
-
-  // @ts-expect-error
-  const store = createStore(rootReducer, applyMiddleware(thunkMiddlware));
-
-  return store;
+const persistConfig = {
+  key: 'root',
+  storage: storage
 };
 
-export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
+const reducers = {
+  task: taskReducer,
+  tag: tagReducer,
+  user: persistReducer(persistConfig, userReducer)
+};
+
+const rootReducer = combineReducers<any>(reducers);
+
+export const createReduxStore = () => {
+  const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunkMiddlware))
+  );
+
+  const persistor = persistStore(store);
+
+  return { store, persistor };
+};
+
+export type AppDispatch = ReturnType<
+  typeof createReduxStore
+>['store']['dispatch'];

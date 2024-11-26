@@ -1,8 +1,17 @@
-import { ITask } from './taskTypes';
+import { ITask, TaskStateSchema } from './taskTypes';
 
-export type GetTasksRequest = void;
+export type GetTasksRequest = TaskStateSchema['filters'];
 
-export type GetTasksResponse = ITask[];
+export interface GetTasksResponse {
+  meta: {
+    total_items: number;
+    total_pages: number;
+    current_page: number;
+    per_page: number;
+    remaining_count: number;
+  };
+  items: ITask[];
+}
 
 export type DeleteTaskRequest = ITask['id'];
 

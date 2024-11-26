@@ -1,9 +1,9 @@
 import { TagStateSchema } from '@/entities/tags/model/types/tagTypes';
 import { TaskStateSchema } from '@/entities/tasks/model/types/taskTypes';
-import { TaskFilterStateSchema } from '@/entities/tasks/ui/TaskFilterPanel/model/types/taskFilterTypes';
+import { UserStateSchema } from '@/entities/user/model/types/userTypes';
 
-export interface stateSchema {
+export interface StateSchema {
   task: TaskStateSchema;
   tag: TagStateSchema;
-  tasksFiltered: TaskFilterStateSchema;
+  user: UserStateSchema;
 }

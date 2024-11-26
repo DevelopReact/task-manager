@@ -1,0 +1,6 @@
+@import '@/app/styles/mixins/mixins.scss';
+
+.HomeTasks {
+  width: 80%;
+  @include FlexDirection();
+}

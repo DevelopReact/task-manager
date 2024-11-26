@@ -65,15 +65,18 @@ export const TaskCard: FC<TaskCardProps> = ({}) => {
 
   const onSubmitFormClick = (data: CreateTaskRequest) => {
     if (!currentEditableTask) {
-      dispatch(createTask(data));
+      dispatch(createTask(data, 1));
     }
 
     if (currentEditableTask) {
       dispatch(
-        updateTask({
-          updatedTaskId: currentEditableTask.id,
-          updatedFields: data
-        })
+        updateTask(
+          {
+            updatedTaskId: currentEditableTask.id,
+            updatedFields: data
+          },
+          1
+        )
       );
       setCurrentEditableTaskId(0);
       setShowTaskCardPanel(false);
@@ -87,7 +90,7 @@ export const TaskCard: FC<TaskCardProps> = ({}) => {
     setSelectedTag('');
     reset();
   };
-  const checkCompleteMark = watch('isComplete', false);
+  const checkCompleteMark = watch('isComplete');
 
   const setCheckCompleteMark = (check: boolean) => {
     setValue('isComplete', check);

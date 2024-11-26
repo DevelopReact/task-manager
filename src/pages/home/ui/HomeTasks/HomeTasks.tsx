@@ -1,29 +1,38 @@
 // react
-import { FC, useLayoutEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 //thunks
 import { getTasks } from '@/entities/tasks/model/thunks/taskThunks';
 //selectors
-import { getTaskState } from '@/entities/tasks/model/selectors/taskSelectors';
-import { getTaskFilterState } from '@/entities/tasks/ui/TaskFilterPanel/model/selectors/taskFilterSelector';
+import {
+  getMetaState,
+  getTaskState
+} from '@/entities/tasks/model/selectors/taskSelectors';
 //ui
-import { TasksList } from '@/entities/tasks/ui';
+import { TaskFilterPanel, TasksList } from '@/entities/tasks/ui';
 import { Error, Loader } from '@/shared/ui';
 import { Illustration } from '@/widgets/ui';
 //lib
 import { useDispatch } from '@/shared/libs/hooks/useDispatch';
+import { Pagination } from '@/shared/ui/Pagination/Pagination';
+// styles
+import styles from './HomeTasks.module.scss';
 
 interface HomeTasksProps {}
 
 export const HomeTasks: FC<HomeTasksProps> = ({}) => {
-  const { tasks, isLoading, isSuccess, error } = useSelector(getTaskState);
-  const { tasksFiltered } = useSelector(getTaskFilterState);
-
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
-    dispatch(getTasks);
-  }, []);
+  const { tasks, isLoading, isSuccess, error, filters } =
+    useSelector(getTaskState);
+
+  const [pageNumber, setPageNumber] = useState<number>(1);
+
+  const { total_pages } = useSelector(getMetaState(pageNumber));
+
+  useEffect(() => {
+    dispatch(getTasks(filters, pageNumber));
+  }, [filters, pageNumber]);
 
   if (isLoading) {
     return <Loader />;
@@ -37,5 +46,17 @@ export const HomeTasks: FC<HomeTasksProps> = ({}) => {
     return <Illustration />;
   }
 
-  return <TasksList tasks={tasks} tasksFiltered={tasksFiltered} />;
+  return (
+    <div className={styles.HomeTasks}>
+      <TaskFilterPanel tasks={tasks} />
+
+      <Pagination
+        countPages={total_pages}
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+      />
+
+      <TasksList tasks={tasks} />
+    </div>
+  );
 };
