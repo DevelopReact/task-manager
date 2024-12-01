@@ -1,0 +1,21 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.taskFilter {
+  @include FlexDirection();
+  cursor: pointer;
+}
+
+.tagFilter {
+  select {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: $color3;
+
+    option {
+      color: $color3;
+      text-align: center;
+    }
+  }
+}

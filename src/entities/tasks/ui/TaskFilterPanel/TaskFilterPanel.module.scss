@@ -16,23 +16,3 @@
   @include FlexContainer(flex-start);
   gap: 20px;
 }
-
-.taskFilter {
-  @include FlexDirection();
-  cursor: pointer;
-}
-
-.tagFilter,
-.checkboxFilter {
-  select {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    color: $color3;
-
-    option {
-      color: $color3;
-      text-align: center;
-    }
-  }
-}

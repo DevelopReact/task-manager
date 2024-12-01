@@ -21,6 +21,11 @@ export type SetMetaType = {
   payload: TaskStateSchema['meta'];
 };
 
+export type SetMetaCurrentPageType = {
+  type: TaskActionTypes.SET_META_CURRENT_PAGE;
+  payload: TaskStateSchema['meta']['current_page'];
+};
+
 export type SetIsSuccessType = {
   type: TaskActionTypes.SET_IS_SUCCESS;
   payload: TaskStateSchema['isSuccess'];
@@ -37,4 +42,5 @@ export type TaskActions =
   | SetTasksType
   | SetIsSuccessType
   | SetFiltersType
-  | SetMetaType;
+  | SetMetaType
+  | SetMetaCurrentPageType;

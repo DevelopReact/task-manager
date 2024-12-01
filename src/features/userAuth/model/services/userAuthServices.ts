@@ -1,7 +1,7 @@
 //api
 import { mockapiInstance } from '@/shared/api/mockapiInstance';
 //types
-import { IUserRequest } from '../types/userServiceTypes';
+import { IUserRequest } from '@/entities/user/model/types/userServiceTypes';
 
 class userService {
   async registerUser(user: IUserRequest) {

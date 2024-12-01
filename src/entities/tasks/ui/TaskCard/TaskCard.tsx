@@ -65,18 +65,15 @@ export const TaskCard: FC<TaskCardProps> = ({}) => {
 
   const onSubmitFormClick = (data: CreateTaskRequest) => {
     if (!currentEditableTask) {
-      dispatch(createTask(data, 1));
+      dispatch(createTask(data));
     }
 
     if (currentEditableTask) {
       dispatch(
-        updateTask(
-          {
-            updatedTaskId: currentEditableTask.id,
-            updatedFields: data
-          },
-          1
-        )
+        updateTask({
+          updatedTaskId: currentEditableTask.id,
+          updatedFields: data
+        })
       );
       setCurrentEditableTaskId(0);
       setShowTaskCardPanel(false);

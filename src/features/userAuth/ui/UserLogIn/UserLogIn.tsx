@@ -4,22 +4,23 @@ import { useForm } from 'react-hook-form';
 //lib
 import { yupResolver } from '@hookform/resolvers/yup';
 //thunks
-import { registerUser } from '@/entities/user/model/thunks/userThunks';
+import { authorizationUser } from '@/features/userAuth/model/thunks/userAuthThunks';
 //libs
-import { userSignUpSchema } from '../../libs/validationSchemas';
+import { userLogInSchema } from '../../libs/validationSchemas';
 //hooks
 import { useDispatch } from '@/shared/libs/hooks/useDispatch';
+//types
+import { IUser } from '@/entities/user/model/types/userTypes';
 //ui
 import { Button, Error, Input } from '@/shared/ui';
-import { IUser } from '@/entities/user/model/types/userTypes';
 // styles
-import styles from './UserSignUp.module.scss';
+import styles from './UserLogIn.module.scss';
 
-interface UserSignUpProps {
+interface UserLogInProps {
   error: string;
 }
 
-export const UserSignUp: FC<UserSignUpProps> = ({ error }) => {
+export const UserLogIn: FC<UserLogInProps> = ({ error }) => {
   const dispatch = useDispatch();
 
   const {
@@ -29,29 +30,20 @@ export const UserSignUp: FC<UserSignUpProps> = ({ error }) => {
     reset
   } = useForm<any>({
     mode: 'onChange',
-    resolver: yupResolver(userSignUpSchema)
+    resolver: yupResolver(userLogInSchema)
   });
 
-  const onSubmitFormClick = (data: IUser) => {
-    const { confirmPassword, ...user } = data;
-    dispatch(registerUser(user));
+  const onSubmitFormClick = (data: Omit<IUser, 'name'>) => {
+    dispatch(authorizationUser(data));
     reset();
   };
 
   return (
     <form
-      className={styles.UserSignUp}
+      className={styles.UserLogIn}
       onSubmit={handleSubmit(onSubmitFormClick)}
     >
-      <h2>Sign Up</h2>
-      <div className={styles.inputWrapper}>
-        <Input
-          type='text'
-          placeholder='name'
-          register={register('name')}
-          error={errors.name}
-        />
-      </div>
+      <h2>Log In</h2>
       <div className={styles.inputWrapper}>
         <Input
           type='email'
@@ -68,17 +60,9 @@ export const UserSignUp: FC<UserSignUpProps> = ({ error }) => {
           error={errors.password}
         />
       </div>
-      <div className={styles.inputWrapper}>
-        <Input
-          type='password'
-          placeholder='confirm password'
-          register={register('confirmPassword')}
-          error={errors.confirmPassword}
-        />
-      </div>
       {error && <Error error={error} />}
       <Button type='submit' backgroundColor='submit' disabled={!isValid}>
-        Sign Up
+        Log In
       </Button>
     </form>
   );

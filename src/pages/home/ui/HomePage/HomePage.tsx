@@ -10,7 +10,7 @@ import { HomeHeader } from '../HomeHeader';
 import { TaskCard } from '@/entities/tasks/ui';
 import { Loader } from '@/shared/ui';
 import { HomeUserPanel } from '../HomeUserPanel';
-import { UserLogIn, UserSignUp } from '@/pages/user/ui';
+import { UserLogIn, UserSignUp } from '@/features/userAuth/ui';
 // styles
 import styles from './HomePage.module.scss';
 

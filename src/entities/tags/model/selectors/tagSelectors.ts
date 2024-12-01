@@ -1,3 +1,3 @@
-import { stateSchema } from '@/app/config/store/stateSchema';
+import { StateSchema } from '@/app/config/store/stateSchema';
 
-export const getTagState = (state: stateSchema) => state.tag;
+export const getTagState = (state: StateSchema) => state.tag;

@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins/mixins.scss';
 
-.HomeTasks {
-  width: 100%;
+.taskFilter {
   @include FlexDirection();
+  cursor: pointer;
 }

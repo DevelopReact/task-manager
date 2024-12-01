@@ -1,9 +1,9 @@
 //config
 import { AppDispatch } from '@/app/config/store/createReduxStore';
 //services
-import { userServices } from '../services/userServices';
+import { userServices } from '../services/userAuthServices';
 //actions
-import { userActionCreators } from '../actionCreators/userActionCreators';
+import { userActionCreators } from '@/entities/user/model/actionCreators/userActionCreators';
 //constants
 import { JWT_TOKEN } from '@/shared/libs/constants/jwtToken';
 

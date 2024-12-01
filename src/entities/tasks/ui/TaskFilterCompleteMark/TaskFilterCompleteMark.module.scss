@@ -1,0 +1,27 @@
+@import '@/app/styles/mixins/mixins.scss';
+@import '@/app/styles/variables/palette.scss';
+
+.taskFilterSection {
+  min-width: 130px;
+  @include FlexContainer(flex-start);
+  gap: 20px;
+}
+
+.taskFilter {
+  @include FlexDirection();
+  cursor: pointer;
+}
+
+.checkboxFilter {
+  select {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: $color3;
+
+    option {
+      color: $color3;
+      text-align: center;
+    }
+  }
+}

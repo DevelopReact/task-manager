@@ -7,7 +7,7 @@ import { StateSchema } from '@/app/config/store/stateSchema';
 import { TaskActions } from '../types/taskActions';
 import { taskActionCreators } from '../actionCreators/taskActionCreators';
 //selectors
-import { getTaskFilters } from '../selectors/taskSelectors';
+import { getMetaState, getTaskFilters } from '../selectors/taskSelectors';
 //services
 import { taskServices } from '../services/taskServices';
 
@@ -36,14 +36,14 @@ export const getTasks =
   };
 
 export const createTask = (
-  task: Parameters<typeof taskServices.createTask>[0],
-  page: number
+  task: Parameters<typeof taskServices.createTask>[0]
 ) => {
   return (dispatch: AppDispatch, getState: () => StateSchema) => {
     dispatch(taskActionCreators.setIsLoading(true));
     dispatch(taskActionCreators.setIsSuccess(false));
 
     const filters = getTaskFilters(getState());
+    const { current_page } = getMetaState(getState());
 
     taskServices
       .createTask({
@@ -51,7 +51,7 @@ export const createTask = (
         isComplete: task.isComplete === undefined ? false : task.isComplete
       })
       .then(() => {
-        dispatch(getTasks(filters, page));
+        dispatch(getTasks(filters, current_page));
         dispatch(taskActionCreators.setIsSuccess(true));
       })
       .catch((error) => {
@@ -64,19 +64,19 @@ export const createTask = (
 };
 
 export const updateTask = (
-  task: Parameters<typeof taskServices.updateTask>[0],
-  page: number
+  task: Parameters<typeof taskServices.updateTask>[0]
 ) => {
   return (dispatch: AppDispatch, getState: () => StateSchema) => {
     dispatch(taskActionCreators.setIsLoading(true));
     dispatch(taskActionCreators.setIsSuccess(false));
 
     const filters = getTaskFilters(getState());
+    const { current_page } = getMetaState(getState());
 
     taskServices
       .updateTask(task)
       .then(() => {
-        dispatch(getTasks(filters, page));
+        dispatch(getTasks(filters, current_page));
         dispatch(taskActionCreators.setIsSuccess(true));
       })
       .catch((error) => {
@@ -89,19 +89,19 @@ export const updateTask = (
 };
 
 export const deleteTask = (
-  id: Parameters<typeof taskServices.deleteTask>[0],
-  page: number
+  id: Parameters<typeof taskServices.deleteTask>[0]
 ) => {
   return (dispatch: AppDispatch, getState: () => StateSchema) => {
     dispatch(taskActionCreators.setIsLoading(true));
     dispatch(taskActionCreators.setIsSuccess(false));
 
     const filters = getTaskFilters(getState());
+    const { current_page } = getMetaState(getState());
 
     taskServices
       .deleteTask(id)
       .then(() => {
-        dispatch(getTasks(filters, page));
+        dispatch(getTasks(filters, current_page));
         dispatch(taskActionCreators.setIsSuccess(true));
       })
       .catch((error) => {

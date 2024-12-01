@@ -41,6 +41,13 @@ export const taskReducer: Reducer<TaskStateSchema, TaskActions> = (
       return { ...state, meta: action.payload };
     }
 
+    case TaskActionTypes.SET_META_CURRENT_PAGE: {
+      return {
+        ...state,
+        meta: { ...state.meta, current_page: action.payload }
+      };
+    }
+
     case TaskActionTypes.SET_ERROR: {
       return { ...state, error: action.payload };
     }

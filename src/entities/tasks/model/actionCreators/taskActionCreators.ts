@@ -4,6 +4,7 @@ import {
   SetFiltersType,
   SetIsSuccessType,
   SetLoadingType,
+  SetMetaCurrentPageType,
   SetMetaType,
   SetTasksType
 } from '../types/taskActions';
@@ -36,6 +37,15 @@ const setMeta = (payload: SetMetaType['payload']): SetMetaType => {
   };
 };
 
+const setMetaCurrentPage = (
+  payload: SetMetaCurrentPageType['payload']
+): SetMetaCurrentPageType => {
+  return {
+    type: TaskActionTypes.SET_META_CURRENT_PAGE,
+    payload: payload
+  };
+};
+
 const setIsSuccess = (
   payload: SetIsSuccessType['payload']
 ): SetIsSuccessType => {
@@ -58,5 +68,6 @@ export const taskActionCreators = {
   setIsLoading,
   setIsSuccess,
   setFilters,
-  setMeta
+  setMeta,
+  setMetaCurrentPage
 };

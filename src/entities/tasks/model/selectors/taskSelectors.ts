@@ -5,7 +5,7 @@ import { ITask } from '../types/taskTypes';
 
 export const getTaskState = (state: StateSchema) => state.task;
 
-export const getMetaState = (page: number) => (state: StateSchema) => {
+export const getMetaState = (state: StateSchema) => {
   return state.task.meta;
 };
 
